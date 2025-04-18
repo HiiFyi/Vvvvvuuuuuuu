@@ -34,6 +34,30 @@ class Database:
                 ban_reason=""
             )
         )
+class Database:
+    default = SETTINGS.copy()
+
+    def __init__(self):
+        # Primary Database collections
+        self.grp = mydb.groups
+        self.misc = mydb.misc
+        self.verify_id = mydb.verify_id
+        self.users = mydb.uersz
+        self.req = mydb.requests
+        self.mGrp = mydb.mGrp
+        self.pmMode = mydb.pmMode
+        self.jisshu_ads_link = mydb.jisshu_ads_link
+        self.grp_and_ids = fsubs.grp_and_ids
+        self.movies_update_channel = mydb.movies_update_channel
+        self.botcol = mydb.botcol
+        # ... [other collections]
+
+        # Secondary Database collections
+        self.fsubs2 = mydb2['fsubs']  # Example of secondary database collection
+
+    # Add methods to interact with the secondary database if necessary.
+    async def get_fsubs2(self):
+        return await self.fsubs2.find_one({})
 
     async def get_settings(self, id):
         chat = await self.grp.find_one({'id':int(id)})
